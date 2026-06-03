@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso 1ª Eval — Bio y Geo 1º ESO</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:    #2563EB;
+  --azul2:   #1d4ed8;
+  --verde:   #16a34a;
+  --verde2:  #15803d;
+  --rojo:    #dc2626;
+  --amber:   #d97706;
+  --morado:  #7c3aed;
+  --rosa:    #db2777;
+  --teal:    #0d9488;
+  --naranja: #ea580c;
+  --fondo:   #f0f4ff;
+  --blanco:  #ffffff;
+  --texto:   #1e1b4b;
+  --texto2:  #6b7280;
+  --borde:   #e2e8f0;
+  --r:       14px;
+  --rlg:     20px;
+  --sombra:  0 4px 20px rgba(0,0,0,0.08);
+  --sombra2: 0 8px 32px rgba(0,0,0,0.14);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--azul);
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.3);
+  position: sticky; top: 0; z-index: 200;
+}
+.header-dot {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.header-txt { color: white; }
+.header-txt strong { display: block; font-weight: 800; font-size: 15px; }
+.header-txt span { font-size: 12px; opacity: 0.7; }
+.header-badge {
+  margin-left: auto;
+  background: rgba(255,255,255,0.15);
+  color: white; border-radius: 99px;
+  padding: 4px 12px; font-size: 12px; font-weight: 700;
+}
+
+/* ── WRAP ── */
+.wrap { max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem 5rem; }
+
+/* ── PANTALLAS ── */
+.pant { display: none; animation: fadeUp 0.3s ease; }
+.pant.on { display: block; }
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(12px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── INICIO ── */
+.inicio-hero {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+}
+.inicio-hero h1 {
+  font-size: 26px; font-weight: 900; color: var(--texto);
+  line-height: 1.2; margin-bottom: 0.5rem;
+}
+.inicio-hero p {
+  color: var(--texto2); font-size: 14px; font-weight: 600;
+}
+
+.seccion-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--texto2);
+  margin: 1.5rem 0 0.6rem;
+}
+
+/* ── CARDS DE TEMA ── */
+.temas-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;
+}
+.tema-card {
+  border-radius: var(--rlg); padding: 1.1rem 0.75rem;
+  cursor: pointer; border: 2.5px solid transparent;
+  transition: all 0.18s cubic-bezier(.4,0,.2,1);
+  text-align: center; position: relative; overflow: hidden;
+}
+.tema-card:hover { transform: translateY(-3px); box-shadow: var(--sombra2); }
+.tema-card.sel { border-color: white; transform: scale(1.03); box-shadow: var(--sombra2); }
+.tema-card .tc-num {
+  font-size: 28px; font-weight: 900; color: rgba(255,255,255,0.25);
+  position: absolute; top: 6px; right: 10px; line-height: 1;
+}
+.tema-card .tc-title {
+  font-size: 13px; font-weight: 800; color: white; line-height: 1.25;
+  position: relative;
+}
+.tema-card .tc-sub {
+  font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 600;
+  margin-top: 4px; position: relative;
+}
+.tc-1 { background: linear-gradient(135deg, #2563EB, #7c3aed); }
+.tc-2 { background: linear-gradient(135deg, #0d9488, #16a34a); }
+.tc-3 { background: linear-gradient(135deg, #ea580c, #d97706); }
+
+/* ── MODOS ── */
+.modos-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.modo-card {
+  background: var(--blanco); border: 2px solid var(--borde);
+  border-radius: var(--r); padding: 1rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.modo-card:hover { border-color: var(--azul); background: #eff6ff; }
+.modo-card.sel { border-color: var(--azul); background: #eff6ff; }
+.modo-card .mc-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.modo-card .mc-txt strong {
+  display: block; font-size: 13px; font-weight: 800; color: var(--texto);
+}
+.modo-card .mc-txt span {
+  font-size: 11px; color: var(--texto2); font-weight: 600;
+}
+.mc-test   .mc-icon { background: #eff6ff; }
+.mc-flash  .mc-icon { background: #fdf4ff; }
+.mc-huecos .mc-icon { background: #f0fdf4; }
+.mc-tabla  .mc-icon { background: #fff7ed; }
+
+/* ── PROGRESS ── */
+.prog-wrap {
+  background: var(--borde); border-radius: 99px;
+  height: 6px; margin-bottom: 1rem; overflow: hidden;
+}
+.prog-fill {
+  height: 6px; border-radius: 99px;
+  background: linear-gradient(90deg, var(--azul), var(--morado));
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── BOLITAS ── */
+.bolitas { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.bolita {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--borde); background: var(--blanco);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800; color: var(--texto2);
+  transition: all 0.2s;
+}
+.bolita.ok  { background: var(--verde); border-color: var(--verde); color: white; }
+.bolita.mal { background: var(--rojo);  border-color: var(--rojo);  color: white; }
+.bolita.now { border-color: var(--azul); color: var(--azul); background: #eff6ff; }
+
+/* ── TARJETA PREGUNTA ── */
+.q-card {
+  background: var(--blanco); border-radius: var(--rlg);
+  padding: 1.5rem; box-shadow: var(--sombra);
+  margin-bottom: 1rem;
+}
+.q-meta {
+  font-size: 11px; font-weight: 800; color: var(--texto2);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem;
+}
+.q-texto {
+  font-size: 18px; font-weight: 800; color: var(--texto);
+  line-height: 1.4; margin-bottom: 1.25rem;
+}
+.opciones { display: grid; gap: 8px; }
+.opcion {
+  padding: 0.85rem 1rem; border-radius: var(--r);
+  border: 2px solid var(--borde); background: #f8fafc;
+  cursor: pointer; font-family: 'Nunito',sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--texto);
+  text-align: left; display: flex; align-items: flex-start; gap: 10px;
+  transition: all 0.15s;
+}
+.opcion:hover:not(.off) {
+  border-color: var(--azul); background: #eff6ff; color: var(--azul);
+}
+.opcion.ok  { background: #f0fdf4; border-color: var(--verde); color: var(--verde); }
+.opcion.mal { background: #fef2f2; border-color: var(--rojo);  color: var(--rojo);  }
+.opcion.off { cursor: default; }
+.op-letra { font-weight: 900; min-width: 20px; font-size: 13px; }
+
+.feedback {
+  margin-top: 0.75rem; border-radius: var(--r);
+  padding: 0.9rem 1rem; font-size: 13px;
+  font-weight: 600; line-height: 1.6; display: none;
+}
+.feedback.show { display: block; }
+.feedback.ok  { background: #f0fdf4; color: var(--verde2); border-left: 4px solid var(--verde); }
+.feedback.mal { background: #fef2f2; color: #991b1b;       border-left: 4px solid var(--rojo);  }
+
+/* ── FLASH ── */
+.flash-wrap {
+  perspective: 1000px; margin-bottom: 1rem; cursor: pointer;
+  min-height: 200px;
+}
+.flash-inner {
+  position: relative; transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  border-radius: var(--rlg);
+}
+.flash-wrap.flip .flash-inner { transform: rotateY(180deg); }
+.flash-front, .flash-back {
+  backface-visibility: hidden;
+  border-radius: var(--rlg);
+  padding: 2rem 1.5rem; box-shadow: var(--sombra);
+  min-height: 200px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.flash-front {
+  background: linear-gradient(135deg, #2563EB 0%, #7c3aed 100%);
+  color: white;
+}
+.flash-back {
+  background: var(--blanco); color: var(--texto);
+  position: absolute; top: 0; left: 0; right: 0;
+  transform: rotateY(180deg);
+  border: 2px solid var(--borde);
+}
+.flash-front .ff-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; opacity: 0.65; margin-bottom: 0.75rem;
+}
+.flash-front .ff-q {
+  font-size: 20px; font-weight: 800; line-height: 1.35;
+}
+.flash-back .fb-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--verde); margin-bottom: 0.6rem;
+}
+.flash-back .fb-r {
+  font-size: 15px; font-weight: 700; line-height: 1.6; color: var(--texto);
+}
+.flash-hint {
+  text-align: center; font-size: 12px; font-weight: 700;
+  color: var(--texto2); margin-bottom: 0.5rem;
+}
+
+/* ── COMPLETAR ── */
+.huecos-item {
+  background: var(--blanco); border: 2px solid var(--borde);
+  border-radius: var(--r); padding: 1rem 1.1rem;
+  margin-bottom: 0.6rem; transition: border-color 0.2s;
+}
+.huecos-item.ok  { border-color: var(--verde); }
+.huecos-item.mal { border-color: var(--rojo);  }
+.huecos-frase {
+  font-size: 14px; font-weight: 700; line-height: 1.9; color: var(--texto);
+}
+.hueco-input {
+  border: 2px solid var(--borde); border-radius: 8px;
+  padding: 3px 10px; font-size: 14px; font-weight: 700;
+  font-family: 'Nunito',sans-serif; color: var(--texto);
+  background: var(--fondo); width: 170px;
+  transition: border-color 0.15s;
+  vertical-align: middle;
+}
+.hueco-input:focus { outline: none; border-color: var(--azul); background: #eff6ff; }
+.hueco-input.ok  { border-color: var(--verde); background: #f0fdf4; color: var(--verde2); }
+.hueco-input.mal { border-color: var(--rojo);  background: #fef2f2; color: #991b1b; }
+.huecos-pista { font-size: 11px; font-weight: 700; color: var(--texto2); margin-top: 4px; }
+.huecos-sol   { font-size: 12px; font-weight: 800; color: var(--verde2); margin-top: 4px; }
+
+/* ── TABLA ── */
+.tabla-scroll { overflow-x: auto; border-radius: var(--r); border: 2px solid var(--borde); margin-bottom: 1.25rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--azul); color: white; padding: 10px 12px; text-align: left; font-weight: 800; font-size: 12px; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--borde); font-weight: 600; color: var(--texto); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #f8fafc; }
+
+/* ── MOHS ── */
+.mohs-wrap { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; margin-bottom: 1rem; }
+.mohs-tile {
+  border-radius: 10px; padding: 0.6rem 0.3rem;
+  text-align: center; cursor: pointer;
+  transition: transform 0.15s;
+  border: 1.5px solid transparent;
+}
+.mohs-tile:hover { transform: translateY(-3px); }
+.mohs-num  { font-size: 22px; font-weight: 900; line-height: 1; }
+.mohs-name { font-size: 11px; font-weight: 800; margin-top: 2px; }
+.mohs-ej   { font-size: 10px; font-weight: 600; margin-top: 3px; display: none; opacity: 0.8; }
+.mohs-tile.open .mohs-ej { display: block; }
+
+/* ── FICHAS RESUMEN ── */
+.ficha-card {
+  border-left: 4px solid var(--azul); background: #eff6ff;
+  border-radius: 0 var(--r) var(--r) 0; padding: 0.65rem 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.ficha-card strong { font-weight: 800; color: var(--texto); display: block; margin-bottom: 2px; }
+.ficha-card span { font-size: 13px; font-weight: 600; color: var(--texto2); line-height: 1.55; }
+
+/* ── RESULTADO ── */
+.result-wrap { text-align: center; padding: 2.5rem 1rem; }
+.result-circulo {
+  width: 120px; height: 120px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+  font-weight: 900;
+}
+.result-num { font-size: 42px; line-height: 1; }
+.result-total { font-size: 16px; opacity: 0.65; }
+.result-msg { font-size: 16px; font-weight: 800; color: var(--texto); margin-bottom: 0.4rem; }
+.result-sub { font-size: 13px; font-weight: 600; color: var(--texto2); margin-bottom: 2rem; }
+
+/* ── BOTONES ── */
+.btn-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.btn-row.center { justify-content: center; }
+.btn-row.between { justify-content: space-between; }
+.btn {
+  padding: 0.65rem 1.2rem; border-radius: 99px;
+  font-family: 'Nunito',sans-serif; font-size: 13px; font-weight: 800;
+  cursor: pointer; border: none; transition: all 0.15s;
+}
+.btn-ghost {
+  background: var(--blanco); color: var(--texto2);
+  border: 2px solid var(--borde);
+}
+.btn-ghost:hover { border-color: var(--azul); color: var(--azul); }
+.btn-blue  { background: var(--azul);  color: white; box-shadow: 0 3px 10px rgba(37,99,235,0.3); }
+.btn-blue:hover  { background: var(--azul2); transform: translateY(-1px); }
+.btn-green { background: var(--verde); color: white; box-shadow: 0 3px 10px rgba(22,163,74,0.3); }
+.btn-green:hover { background: var(--verde2); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+.nav-info { font-size: 12px; font-weight: 700; color: var(--texto2); }
+
+/* ── UTIL ── */
+.sec-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--texto2); margin-bottom: 0.6rem;
+}
+.mt { margin-top: 1.25rem; }
+.chip {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 99px; font-size: 11px; font-weight: 800;
+  background: #eff6ff; color: var(--azul); margin-bottom: 1rem;
+}
+
+@media(max-width:480px){
+  .temas-grid { grid-template-columns:1fr; }
+  .modos-grid { grid-template-columns:1fr; }
+  .mohs-wrap  { grid-template-columns:repeat(3,1fr); }
+  .q-texto    { font-size:16px; }
+  .flash-front .ff-q { font-size:17px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-dot">🌍</div>
+  <div class="header-txt">
+    <strong>Bio y Geo · 1.º ESO</strong>
+    <span>Colegio El Ave María</span>
+  </div>
+  <div class="header-badge">1.ª Eval</div>
+</div>
+
+<div class="wrap">
+
+  <!-- ══ INICIO: solo elegir tema ══ -->
+  <div class="pant on" id="p-inicio">
+    <div class="inicio-hero">
+      <h1>¿Listo para repasar?</h1>
+      <p>Elige un tema para empezar. Primero verás la teoría, luego practicas.</p>
+    </div>
+    <div class="sec-label">¿De qué tema?</div>
+    <div class="temas-grid">
+      <div class="tema-card tc-1 sel" onclick="irTeoria(0,this)">
+        <div class="tc-num">1</div>
+        <div class="tc-title">Geosfera y Minerales</div>
+        <div class="tc-sub">Tierra por dentro · Rocas · Mohs</div>
+      </div>
+      <div class="tema-card tc-2" onclick="irTeoria(1,this)">
+        <div class="tc-num">2</div>
+        <div class="tc-title">La Atmósfera</div>
+        <div class="tc-sub">Capas · Contaminación · Origen</div>
+      </div>
+      <div class="tema-card tc-3" onclick="irTeoria(2,this)">
+        <div class="tc-num">3</div>
+        <div class="tc-title">La Hidrosfera</div>
+        <div class="tc-sub">Agua · Propiedades · Ciclo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TEORÍA ══ -->
+  <div class="pant" id="p-teoria"></div>
+
+  <!-- ══ ACTIVIDADES ══ -->
+  <div class="pant" id="p-actividades"></div>
+
+  <!-- ══ JUEGO ══ -->
+  <div class="pant" id="p-juego"></div>
+
+  <!-- ══ RESULTADO ══ -->
+  <div class="pant" id="p-resultado"></div>
+
+</div><!-- /wrap -->
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATOS
+// ══════════════════════════════════════════════════════════
+const TEMAS = [
+
+/* ── 1: GEOSFERA Y MINERALES ── */
+{
+  nombre: "Geosfera y Minerales",
+  tabla: {
+    cols:["Capa","¿Hasta dónde llega?","Temperatura","¿Sólido o líquido?","¿De qué está hecha?"],
+    filas:[
+      ["Corteza continental","35–70 km de grosor","+30 °C por km","Sólida","Granito (como el de las encimeras de cocina)"],
+      ["Corteza oceánica","6–10 km de grosor","+30 °C por km","Sólida","Basalto (más oscuro y denso que el granito)"],
+      ["Manto","Hasta 2.900 km","600–3.500 °C","Sólida (la presión impide que se funda)","Peridotita: rica en olivino y piroxeno"],
+      ["Núcleo externo","2.900–5.100 km","4.000–5.500 °C","Líquida","Hierro + Níquel"],
+      ["Núcleo interno","Hasta el centro (6.371 km)","Hasta 5.500 °C","Sólida (presión extrema)","Hierro + Níquel"],
+    ]
+  },
+  fichas:[
+    { p:"¿Qué diferencia hay entre el hipocentro y el epicentro?", r:"El HIPOCENTRO (o foco) es el punto dentro de la Tierra donde se origina el terremoto. El EPICENTRO es el punto de la superficie justo encima, donde se nota más el temblor." },
+    { p:"¿Cuáles son los métodos directos para estudiar el interior de la Tierra? ¿Cuál es su límite?", r:"Son: volcanes, sondeos y minas, y la erosión. El problema es que solo nos permiten llegar a unos 12 km... ¡y el centro está a 6.371 km! Para el resto usamos el método sísmico (indirecto)." },
+    { p:"¿Por qué el manto está sólido si tiene temperaturas altísimas?", r:"Porque la PRESIÓN es tan grande que no deja que las rocas se fundan, aunque estén a 3.500 °C. La presión actúa como si 'apretara' las rocas y las mantuviera sólidas." },
+    { p:"¿Qué diferencia hay entre la corteza continental y la oceánica?", r:"La continental es más GRUESA (35–70 km) y está hecha de GRANITO (más ligero). La oceánica es más DELGADA (6–10 km) y está hecha de BASALTO (más denso y oscuro)." },
+    { p:"¿Por qué la pirita se llama 'el oro de los tontos'?", r:"Porque tiene un color dorado muy parecido al oro. Pero si la rascas, su RAYA es negra (la del oro es amarilla). Además es mucho más dura y ligera que el oro real. Mucha gente la confundió en el pasado." },
+    { p:"¿Qué es la raya de un mineral?", r:"Es el color que deja el mineral cuando lo frotas contra una porcelana blanca. Lo interesante es que puede ser diferente al color del mineral. Ejemplo: la pirita es dorada pero su raya es NEGRA." },
+    { p:"¿Cuál es el mineral más blando y el más duro de la escala de Mohs?", r:"El más BLANDO es el TALCO (dureza 1) — tan blando que puedes rayarlo con la uña. El más DURO es el DIAMANTE (dureza 10) — solo lo raya otro diamante." },
+    { p:"¿Qué mineral es magnético y cómo se llama?", r:"La MAGNETITA. Es de color negro y se atrae con un imán. De hecho, los primeros exploradores la usaron para fabricar brújulas, porque siempre apunta al norte." },
+  ],
+  huecos:[
+    { f:"La corteza continental está formada por _____, una roca que también se usa en encimeras de cocina.", r:"granito", p:"Roca ígnea de color claro" },
+    { f:"El punto de la superficie donde más se nota un terremoto se llama _____.", r:"epicentro", p:"Está justo encima del foco" },
+    { f:"El manto llega hasta los _____ km de profundidad.", r:"2900", p:"Dos mil novecientos" },
+    { f:"El núcleo externo está en estado _____, mientras que el interno es sólido.", r:"líquido", p:"Como el agua, pero de hierro y níquel fundidos" },
+    { f:"El mineral más blando de la escala de Mohs (dureza 1) es el _____.", r:"talco", p:"Se usa en polvos de bebé" },
+    { f:"La raya de la pirita es _____, aunque el mineral parezca dorado.", r:"negra", p:"Por eso la llaman 'el oro de los tontos'" },
+    { f:"El mineral _____ es negro y se atrae con un imán.", r:"magnetita", p:"La usaron para fabricar las primeras brújulas" },
+    { f:"La corteza oceánica está formada por _____, una roca más oscura y densa que el granito.", r:"basalto", p:"Cubre el fondo del océano" },
+  ],
+  test:[
+    { p:"¿Qué método usamos para conocer cómo es el interior de la Tierra desde muy lejos?", ops:["Bajar en ascensor hasta el centro","Estudiar las ondas sísmicas de los terremotos","Ver los volcanes desde un avión","Mirar el planeta con un telescopio"], c:1, exp:"Las ONDAS SÍSMICAS (producidas por terremotos) cambian de velocidad según el material que atraviesan. Estudiando ese cambio, los científicos 'ven' el interior sin llegar hasta allí." },
+    { p:"¿De qué está hecha la corteza oceánica (el suelo del mar)?", ops:["Granito, como los continentes","Peridotita, como el manto","Basalto, más oscuro y denso","Hierro y níquel, como el núcleo"], c:2, exp:"El suelo del océano está hecho de BASALTO, una roca volcánica oscura y más densa que el granito. Por eso los continentes 'flotan' sobre el fondo oceánico." },
+    { p:"El núcleo externo de la Tierra es... ¿cómo?", ops:["Sólido como una roca","Gaseoso como el aire","Líquido: hierro y níquel fundidos","Semisólido como el manto"], c:2, exp:"El NÚCLEO EXTERNO está LÍQUIDO porque la presión allí ya no es suficiente para mantenerlo sólido. Ese hierro líquido moviéndose genera el campo magnético de la Tierra." },
+    { p:"La pirita raya negro aunque sea dorada. ¿Qué propiedad mineral es esa?", ops:["El brillo","La exfoliación","La dureza","La raya"], c:3, exp:"La RAYA es el color del mineral cuando lo reduces a polvo. Es más fiable que el color del mineral entero, porque el color puede variar por impurezas. La raya negra de la pirita la delata." },
+    { p:"¿Qué dureza tiene el cuarzo en la escala de Mohs?", ops:["5","6","7","8"], c:2, exp:"El CUARZO tiene dureza 7. Recuerda el orden: Talco(1) Yeso(2) Calcita(3) Fluorita(4) Apatito(5) Ortosa(6) Cuarzo(7) Topacio(8) Corindón(9) Diamante(10)." },
+    { p:"¿Cuál es el mineral magnético que usaron para las primeras brújulas?", ops:["Pirita","Magnetita","Galena","Cinabrio"], c:1, exp:"La MAGNETITA es de color negro y se atrae con un imán. Es la razón de que se pudieran fabricar brújulas: apunta hacia el norte magnético de la Tierra." },
+    { p:"¿Qué dureza tiene la ortosa (el feldespato del granito) en la escala de Mohs?", ops:["4","5","6","7"], c:2, exp:"La ORTOSA tiene dureza 6. Es uno de los minerales más comunes de las rocas ígneas y forma parte del granito junto con el cuarzo y la mica." },
+    { p:"¿Cuál de estos minerales forman el manto terrestre principalmente?", ops:["Granito","Basalto","Olivino y piroxeno","Halita (sal común)"], c:2, exp:"El MANTO tiene una composición parecida a la peridotita, que está rica en OLIVINO (verde oliva) y PIROXENO. El olivino es el mineral más abundante del interior de la Tierra." },
+  ]
+},
+
+/* ── 2: ATMÓSFERA ── */
+{
+  nombre: "La Atmósfera",
+  tabla:{
+    cols:["Capa","¿Qué pasa allí?"],
+    filas:[
+      ["Troposfera","Donde vivimos. Tiene el 80% del aire. Aquí pasan todas las tormentas, la lluvia, el viento..."],
+      ["Estratosfera","Donde vuelan los aviones. Aquí está la capa de ozono que nos protege de los rayos UV del Sol."],
+      ["Mesosfera","Aquí se queman los meteoritos cuando entran. Lo que vemos como 'estrella fugaz' es eso."],
+      ["Termosfera","Temperaturas de más de 1.000 °C. Aquí se producen las auroras boreales."],
+      ["Exosfera","La capa más exterior. Casi no hay gases. Es prácticamente espacio exterior."],
+    ]
+  },
+  fichas:[
+    { p:"¿Cómo se formó la atmósfera? Resume las 4 etapas.", r:"1) Los volcanes expulsaron gases (CO₂, vapor de agua...) que formaron la atmósfera primitiva. 2) El vapor de agua se condensó y cayó como lluvia, formando los océanos. 3) Aparecieron bacterias fotosintéticas que metieron oxígeno. 4) Con oxígeno, pudieron aparecer los animales que respiramos." },
+    { p:"¿Cuánto hay de nitrógeno, oxígeno y CO₂ en el aire?", r:"El aire es básicamente: 78% NITRÓGENO, 21% OXÍGENO y solo 0,033% de CO₂. El resto son gases raros como el argón o el vapor de agua." },
+    { p:"¿En qué capa de la atmósfera ocurren los fenómenos del tiempo (lluvia, tormentas...)?", r:"En la TROPOSFERA, la capa más baja. Contiene el 80% de todo el aire de la atmósfera. También es donde vivimos nosotros." },
+    { p:"¿Para qué sirve la capa de ozono y dónde está?", r:"Está en la ESTRATOSFERA y actúa como un escudo solar: filtra las radiaciones ultravioletas (UV) del Sol que dañan la piel, los ojos y el ADN de los seres vivos." },
+    { p:"¿Por qué vemos 'estrellas fugaces'?", r:"No son estrellas: son METEORITOS que entran en la atmósfera a gran velocidad. Al rozar con los gases de la MESOSFERA, se calientan tanto que se queman y vemos ese rastro de luz." },
+    { p:"¿En qué capa se producen las auroras boreales?", r:"En la TERMOSFERA (también llamada ionosfera). Las partículas que llegan del Sol interaccionan con los gases de esa capa y producen esas luces de colores en el cielo polar." },
+    { p:"¿Qué es el efecto invernadero y por qué es necesario?", r:"Es cuando los gases de la atmósfera (sobre todo el CO₂ y el vapor de agua) retienen parte del calor del Sol y calientan la Tierra. SIN él, la temperatura media sería de -18 °C y todo estaría congelado." },
+    { p:"¿Cuáles son los principales contaminantes atmosféricos?", r:"Los gases: CO₂, óxidos de azufre (SOx), óxidos de nitrógeno (NOx) y CFCs (los de los sprays viejos). También las partículas sólidas en suspensión y el ruido. Todos tienen efectos sobre el clima y la salud." },
+  ],
+  huecos:[
+    { f:"El gas más abundante en el aire es el _____ (78%).", r:"nitrógeno", p:"N₂ · No es el que respiramos" },
+    { f:"La capa de ozono está en la _____, y nos protege de los rayos UV.", r:"estratosfera", p:"La segunda capa desde abajo" },
+    { f:"Los fenómenos meteorológicos (lluvia, tormentas...) ocurren en la _____.", r:"troposfera", p:"Donde vivimos, la más baja" },
+    { f:"Las primeras bacterias fotosintéticas aparecieron hace _____ millones de años.", r:"3500", p:"Tres mil quinientos" },
+    { f:"Las auroras boreales se producen en la _____.", r:"termosfera", p:"La cuarta capa, con temperaturas altísimas" },
+    { f:"El oxígeno representa el _____ % del aire.", r:"21", p:"Veintiuno" },
+    { f:"Los meteoritos se queman al entrar en la _____.", r:"mesosfera", p:"La tercera capa" },
+    { f:"Sin el efecto _____, la temperatura de la Tierra sería de -18 °C.", r:"invernadero", p:"Los gases retienen el calor solar" },
+  ],
+  test:[
+    { p:"¿Qué organismos pusieron oxígeno en la atmósfera por primera vez?", ops:["Los dinosaurios","Las bacterias fotosintéticas, hace 3.500 millones de años","Los volcanes","Las plantas con flor"], c:1, exp:"Las BACTERIAS FOTOSINTÉTICAS (cianobacterias) fueron los primeros seres vivos en hacer fotosíntesis y liberar oxígeno. Sin ellas, hoy no podríamos respirar." },
+    { p:"¿En qué capa vuelan los aviones comerciales?", ops:["Troposfera","Mesosfera","Estratosfera","Termosfera"], c:2, exp:"Los aviones vuelan en la ESTRATOSFERA, por encima de las nubes y turbulencias de la troposfera. Ahí el aire es más estable, aunque tienen que protegerse de las radiaciones UV." },
+    { p:"¿Cuál es el gas más abundante en el aire?", ops:["Oxígeno (O₂), el que respiramos","Dióxido de carbono (CO₂)","Ozono (O₃)","Nitrógeno (N₂)"], c:3, exp:"El NITRÓGENO ocupa el 78% del aire. El oxígeno solo es el 21%. Mucha gente lo confunde porque respiramos oxígeno, pero el nitrógeno 'rellena' la mayor parte del aire." },
+    { p:"¿En qué capa se producen las auroras boreales?", ops:["Estratosfera","Mesosfera","Termosfera","Exosfera"], c:2, exp:"Las AURORAS BOREALES se forman en la TERMOSFERA cuando partículas cargadas del Sol chocan con los gases de esa capa y emiten luz de colores. Son espectaculares." },
+    { p:"¿Cuál de estos NO es un contaminante atmosférico?", ops:["Óxidos de nitrógeno (NOx)","El nitrógeno (N₂) natural del aire","Los CFCs de los sprays","Las partículas sólidas del humo"], c:1, exp:"El NITRÓGENO (N₂) que está naturalmente en el aire NO contamina — es el 78% del aire y siempre ha estado ahí. Los NOx (óxidos de nitrógeno) sí contaminan, ¡son distintos!" },
+    { p:"¿Qué capa de la atmósfera contiene el 80% del aire?", ops:["Estratosfera","Mesosfera","Exosfera","Troposfera"], c:3, exp:"La TROPOSFERA, la capa más baja y más densa. Aquí vive todo el aire que respiramos, se forman las nubes y pasan todos los fenómenos meteorológicos." },
+    { p:"¿Hace cuántos millones de años se formó la atmósfera primitiva?", ops:["3.500 Ma","4.600 Ma","4.400 Ma","2.500 Ma"], c:2, exp:"La atmósfera primitiva empezó a formarse hace unos 4.400 millones de años, cuando los volcanes expulsaron grandes cantidades de gases al enfriarse la Tierra." },
+    { p:"¿Qué función tiene la capa de ozono?", ops:["Regular la temperatura global","Filtrar las radiaciones UV del Sol","Producir lluvia ácida","Generar las auroras boreales"], c:1, exp:"La capa de OZONO en la estratosfera actúa como un filtro solar: absorbe la mayor parte de los rayos ultravioletas que llegan del Sol y que dañarían nuestras células y ADN." },
+  ]
+},
+
+/* ── 3: HIDROSFERA ── */
+{
+  nombre: "La Hidrosfera",
+  tabla:{
+    cols:["Tipo de agua","Sales (g/litro)","Dónde está","Lo más importante"],
+    filas:[
+      ["Agua de mar","35 g","Océanos y mares (97% del agua total)","Temperatura media 17,5 °C. Olas, mareas y corrientes."],
+      ["Glaciares","Casi 0","Polos y cimas de montañas","Hielo acumulado. Se mueve muy lentamente."],
+      ["Ríos y torrentes","0,5 g","Por la superficie de los continentes","Nacen de un manantial o del deshielo. Los torrentes tienen caudal irregular."],
+      ["Lagos y lagunas","0,5 g","Depresiones del terreno","Los lagos tienen agua todo el año. Las lagunas se secan a veces."],
+      ["Aguas subterráneas","0,5 g","Bajo tierra, en grietas y rocas porosas","Cuando salen a la superficie forman un manantial."],
+    ]
+  },
+  fichas:[
+    { p:"¿Por qué el hielo flota en el agua? ¿Qué ventaja tiene para los seres vivos?", r:"Al congelarse, el agua se EXPANDE (ocupa más volumen) y se vuelve menos densa. Por eso el hielo flota. Esto es vital: la capa de hielo actúa como un aislante y el agua de abajo permanece líquida, permitiendo que los seres vivos sobrevivan el invierno." },
+    { p:"¿Qué son los puentes de hidrógeno?", r:"Son la 'cola' que une unas moléculas de agua con otras. Son más débiles que el enlace que une el H y el O dentro de cada molécula, pero gracias a ellos el agua tiene propiedades únicas como la tensión superficial." },
+    { p:"¿Qué es la tensión superficial? Pon un ejemplo.", r:"Es la 'película' resistente que forman las moléculas de la superficie del agua al atraerse fuertemente entre sí. Por eso ciertos insectos como el zapatero pueden caminar sobre el agua sin hundirse." },
+    { p:"¿Cuál es la diferencia entre un lago y una laguna?", r:"Los dos son masas de agua dulce en depresiones del terreno. La diferencia: los LAGOS tienen agua todo el año. Las LAGUNAS se pueden secar completamente en alguna época del año (sobre todo en verano)." },
+    { p:"¿Qué es un manantial?", r:"Es el lugar donde el agua subterránea sale a la superficie de forma natural. El agua se ha filtrado por el suelo durante años, y cuando encuentra una salida, brota." },
+    { p:"¿Cuáles son las 3 funciones del agua para los seres vivos?", r:"1) SOPORTE: los seres vivos surgieron en el agua y somos mayoritariamente agua. 2) FUNCIONES VITALES: el metabolismo y todas las reacciones químicas del cuerpo necesitan agua. 3) REGULACIÓN TÉRMICA: el agua regula nuestra temperatura corporal y el clima del planeta." },
+    { p:"Clasifica estos contaminantes: mercurio, salmonela, red de nailon, nitratos.", r:"RESIDUO SÓLIDO: red de nailon. SUSTANCIAS DISUELTAS: mercurio y nitratos. SER VIVO CONTAMINANTE: salmonela (es una bacteria)." },
+    { p:"¿Cómo funciona el ciclo integral del agua?", r:"El agua se CAPTA de la naturaleza → se POTABILIZA en una ETAP (la hacen apta para beber) → se DISTRIBUYE por tuberías a los hogares → después de usarla va al ALCANTARILLADO → se DEPURA en una EDAR → vuelve al río o al mar." },
+  ],
+  huecos:[
+    { f:"El agua del mar tiene _____ gramos de sal por litro.", r:"35", p:"Treinta y cinco" },
+    { f:"El hielo flota porque al congelarse el agua _____ y se vuelve menos densa.", r:"se expande", p:"Ocupa más volumen" },
+    { f:"Cuando el agua subterránea sale a la superficie forma un _____.", r:"manantial", p:"Una fuente natural" },
+    { f:"La bacteria Salmonela es un contaminante de tipo _____.", r:"ser vivo", p:"No es un residuo ni una sustancia disuelta" },
+    { f:"El agua se hace apta para beber en una estación de _____ del agua potable (ETAP).", r:"tratamiento", p:"La que purifica el agua antes de que llegue a tu grifo" },
+    { f:"Los insectos que caminan sobre el agua aprovechan la _____ superficial del agua.", r:"tensión", p:"La 'película' que forman las moléculas de la superficie" },
+    { f:"Las lagunas, a diferencia de los lagos, se _____ en alguna época del año.", r:"secan", p:"Se quedan sin agua" },
+    { f:"La molécula del agua está formada por dos átomos de hidrógeno y uno de _____.", r:"oxígeno", p:"H₂O · El elemento número 8" },
+  ],
+  test:[
+    { p:"¿Por qué el hielo flota sobre el agua líquida?", ops:["Porque el hielo pesa menos que el agua","Porque al congelarse el agua se expande y es menos densa","Porque el hielo tiene más sal","Porque el agua caliente sube"], c:1, exp:"Al congelarse, el agua se EXPANDE (ocupa más volumen), así que su densidad baja. Al ser menos densa que el agua líquida, el hielo flota. Esto es rarísimo: casi ninguna otra sustancia hace lo mismo." },
+    { p:"¿Cuánta sal tiene un litro de agua de mar?", ops:["0,5 g","10 g","35 g","100 g"], c:2, exp:"El agua de mar tiene unos 35 g de sal por litro. El agua dulce de ríos y lagos solo tiene 0,5 g/l. Por eso el agua del mar no podemos beberla directamente." },
+    { p:"¿Qué tipo de contaminante es la bacteria Salmonela?", ops:["Residuo sólido","Sustancia disuelta","Contaminante térmico","Ser vivo contaminante"], c:3, exp:"La SALMONELA es una bacteria, por eso se clasifica como 'ser vivo contaminante'. Puede llegar al agua con aguas residuales y causar graves infecciones si bebes agua contaminada." },
+    { p:"¿Dónde se convierte el agua en agua potable (apta para beber)?", ops:["En la EDAR (depuradora de aguas residuales)","En la ETAP (estación de tratamiento de agua potable)","En los glaciares","En los manantiales naturales"], c:1, exp:"La ETAP (Estación de Tratamiento de Agua Potable) filtra y desinfecta el agua captada de ríos o acuíferos para que sea segura para el consumo humano." },
+    { p:"¿Qué propiedad del agua permite a ciertos insectos caminar sobre ella?", ops:["Alto poder calorífico","Capilaridad","Tensión superficial","Que es un gran disolvente"], c:2, exp:"La TENSIÓN SUPERFICIAL: las moléculas de la superficie se atraen tan fuerte entre sí que forman una especie de película elástica. El zapatero (y otros insectos) no pesa suficiente para romperla." },
+    { p:"¿Cuál es la diferencia entre un lago y una laguna?", ops:["El lago es más pequeño","La laguna tiene agua salada","La laguna se seca en algún momento del año","El lago está siempre en montaña"], c:2, exp:"Los LAGOS tienen agua todo el año. Las LAGUNAS pueden secarse completamente en verano o en épocas de sequía. Los dos son masas de agua dulce en depresiones del terreno." },
+    { p:"¿Cuántos átomos tiene la molécula de agua?", ops:["2 (uno de H y uno de O)","3 (dos de H y uno de O)","4 (dos de H y dos de O)","2 (dos de H)"], c:1, exp:"La molécula H₂O tiene 3 átomos: 2 de HIDRÓGENO y 1 de OXÍGENO. Están unidos por un enlace covalente, y las moléculas entre sí se unen por puentes de hidrógeno." },
+    { p:"¿Qué es un manantial?", ops:["Un tipo de glaciar de montaña","Una laguna temporal","El lugar donde el agua subterránea sale a la superficie","Un depósito artificial de agua"], c:2, exp:"Un MANANTIAL es donde el agua que se ha ido filtrando bajo tierra sale de forma natural a la superficie. Son fuentes de agua dulce y limpia muy importantes para muchas comunidades." },
+  ]
+},
+];
+
+const MOHS=[
+  {n:1,nombre:"Talco",   bg:"#d1fae5",tc:"#065f46",ej:"Tan blando que lo raya tu uña. Polvos de bebé."},
+  {n:2,nombre:"Yeso",    bg:"#d1fae5",tc:"#065f46",ej:"Paredes, escayola, Rosa del Desierto."},
+  {n:3,nombre:"Calcita", bg:"#a7f3d0",tc:"#065f46",ej:"Caliza y mármol. Exfoliación romboédrica."},
+  {n:4,nombre:"Fluorita",bg:"#6ee7b7",tc:"#064e3b",ej:"Muy colorida. Usos industriales."},
+  {n:5,nombre:"Apatito", bg:"#34d399",tc:"#064e3b",ej:"¡Tus dientes y huesos tienen apatito!"},
+  {n:6,nombre:"Ortosa",  bg:"#10b981",tc:"#fff",   ej:"Feldespato rosado. Componente del granito."},
+  {n:7,nombre:"Cuarzo",  bg:"#059669",tc:"#fff",   ej:"El mineral más común. Amatista, sílex."},
+  {n:8,nombre:"Topacio", bg:"#047857",tc:"#fff",   ej:"Piedra preciosa. Tono azul amarillento."},
+  {n:9,nombre:"Corindón",bg:"#065f46",tc:"#fff",   ej:"Rubí y zafiro son corindón coloreado."},
+  {n:10,nombre:"Diamante",bg:"#064e3b",tc:"#fff",  ej:"El más duro. Solo lo raya otro diamante."},
+];
+
+// ══════════════════════════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════════════════════════
+let tIdx=0, modo='', preguntas=[], pActual=0, respuestas=[], huecoState=[];
+
+// ══════════════════════════════════════════════════════════
+// UI HELPERS
+// ══════════════════════════════════════════════════════════
+const PANTALLAS = ['p-inicio','p-teoria','p-actividades','p-juego','p-resultado'];
+
+function show(id){
+  PANTALLAS.forEach(p=>{
+    document.getElementById(p).classList.toggle('on', p===id);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function irTeoria(i,el){
+  tIdx=i;
+  document.querySelectorAll('.tema-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  renderTeoria();
+  show('p-teoria');
+}
+
+function renderTeoria(){
+  const t=TEMAS[tIdx], tb=t.tabla;
+  let tHtml=`<div class="tabla-scroll"><table><thead><tr>`;
+  tb.cols.forEach(c=>{tHtml+=`<th>${c}</th>`;});
+  tHtml+=`</tr></thead><tbody>`;
+  tb.filas.forEach(f=>{tHtml+=`<tr>${f.map(c=>`<td>${c}</td>`).join('')}</tr>`;});
+  tHtml+=`</tbody></table></div>`;
+
+  let mohs='';
+  if(tIdx===0){
+    mohs=`<div class="sec-label" style="margin-top:1.5rem;">Escala de Mohs — toca cada mineral para saber más</div>
+    <div class="mohs-wrap">
+      ${MOHS.map(m=>`<div class="mohs-tile" style="background:${m.bg};color:${m.tc};" onclick="this.classList.toggle('open')">
+        <div class="mohs-num">${m.n}</div>
+        <div class="mohs-name">${m.nombre}</div>
+        <div class="mohs-ej">${m.ej}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  let fichas=`<div class="sec-label" style="margin-top:1.5rem;">Lo más importante</div>`;
+  t.fichas.forEach(f=>{
+    fichas+=`<div class="ficha-card"><strong>${f.p}</strong><span>${f.r}</span></div>`;
+  });
+
+  document.getElementById('p-teoria').innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;">
+      <button class="btn btn-ghost" onclick="show('p-inicio')" style="padding:0.5rem 0.9rem;">← Temas</button>
+      <div class="chip" style="margin:0;">${t.nombre}</div>
+    </div>
+    <h2 style="font-size:20px;font-weight:900;color:var(--texto);margin-bottom:0.3rem;">Teoría del tema</h2>
+    <p style="font-size:13px;font-weight:600;color:var(--texto2);margin-bottom:1.25rem;">Léela con calma. Cuando la tengas clara, dale a practicar.</p>
+    ${tHtml}${mohs}${fichas}
+    <div style="margin-top:1.75rem;background:linear-gradient(135deg,var(--azul),var(--morado));border-radius:var(--rlg);padding:1.5rem;text-align:center;">
+      <p style="color:rgba(255,255,255,0.8);font-size:13px;font-weight:700;margin-bottom:0.6rem;">¿Ya la tienes? Ahora pon a prueba lo que sabes</p>
+      <button class="btn" style="background:white;color:var(--azul);font-weight:900;" onclick="renderActividades();show('p-actividades')">Ir a practicar →</button>
+    </div>`;
+}
+
+function renderActividades(){
+  const t=TEMAS[tIdx];
+  document.getElementById('p-actividades').innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;">
+      <button class="btn btn-ghost" onclick="show('p-teoria')" style="padding:0.5rem 0.9rem;">← Teoría</button>
+      <div class="chip" style="margin:0;">${t.nombre}</div>
+    </div>
+    <h2 style="font-size:20px;font-weight:900;color:var(--texto);margin-bottom:0.3rem;">¿Cómo quieres practicar?</h2>
+    <p style="font-size:13px;font-weight:600;color:var(--texto2);margin-bottom:1.25rem;">Empieza por las tarjetas si acabas de leer la teoría. El test es para cuando ya controlas.</p>
+    <div class="modos-grid">
+      <div class="modo-card mc-flash" onclick="lanzar('flash')" style="border-color:#7c3aed;background:#faf5ff;">
+        <div class="mc-icon" style="background:#ede9fe;">🃏</div>
+        <div class="mc-txt">
+          <strong>1. Tarjetas</strong>
+          <span>Pregunta → gira → respuesta</span>
+        </div>
+      </div>
+      <div class="modo-card mc-test" onclick="lanzar('test')">
+        <div class="mc-icon">❓</div>
+        <div class="mc-txt">
+          <strong>2. Tipo test</strong>
+          <span>8 preguntas con 4 opciones</span>
+        </div>
+      </div>
+      <div class="modo-card mc-huecos" onclick="lanzar('huecos')">
+        <div class="mc-icon">✏️</div>
+        <div class="mc-txt">
+          <strong>3. Rellena el hueco</strong>
+          <span>El más difícil · Sin pistas</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function lanzar(m){
+  modo=m; pActual=0; respuestas=[];
+  if(m==='test'){ preguntas=mezclar([...TEMAS[tIdx].test]); renderTest(); }
+  else if(m==='flash'){ preguntas=mezclar([...TEMAS[tIdx].fichas]); renderFlash(); }
+  else if(m==='huecos'){ huecoState=mezclar([...TEMAS[tIdx].huecos]).map(h=>({...h,val:'',est:'pend'})); renderHuecos(); }
+  show('p-juego');
+}
+
+function mezclar(a){
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function volver(){ show('p-actividades'); }
+
+// ══════════════════════════════════════════════════════════
+// BARRA + BOLITAS
+// ══════════════════════════════════════════════════════════
+function htmlProg(actual,total){
+  const pct=Math.round((actual/total)*100);
+  return `<div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>`;
+}
+function htmlBolitas(n,actual,res){
+  return `<div class="bolitas">${Array.from({length:n},(_,i)=>{
+    let cls=i===actual?'now':res[i]===true?'ok':res[i]===false?'mal':'';
+    let lbl=res[i]===true?'✓':res[i]===false?'✗':(i+1);
+    return `<div class="bolita ${cls}">${lbl}</div>`;
+  }).join('')}</div>`;
+}
+
+// ══════════════════════════════════════════════════════════
+// TEST
+// ══════════════════════════════════════════════════════════
+function renderTest(){
+  const q=preguntas[pActual], n=preguntas.length;
+  const letras=['a','b','c','d'];
+  document.getElementById('p-juego').innerHTML=`
+    ${htmlProg(pActual,n)}
+    ${htmlBolitas(n,pActual,respuestas)}
+    <div class="q-card">
+      <div class="q-meta">${TEMAS[tIdx].nombre} · Pregunta ${pActual+1} de ${n}</div>
+      <div class="q-texto">${q.p}</div>
+      <div class="opciones">
+        ${q.ops.map((o,i)=>`<button class="opcion" id="op${i}" onclick="respTest(${i})">
+          <span class="op-letra">${letras[i]})</span>${o}
+        </button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>
+    <div class="btn-row between">
+      <button class="btn btn-ghost" onclick="volver()">← Volver</button>
+      <span class="nav-info" id="ni"></span>
+      <button class="btn btn-blue" id="bsig" style="display:none" onclick="sigTest()">Siguiente →</button>
+    </div>`;
+}
+
+function respTest(i){
+  const q=preguntas[pActual];
+  document.querySelectorAll('.opcion').forEach(el=>{el.classList.add('off');el.onclick=null;});
+  const ok=i===q.c;
+  respuestas[pActual]=ok;
+  document.querySelectorAll('.opcion').forEach((el,j)=>{
+    if(j===q.c) el.classList.add('ok');
+    else if(j===i&&!ok) el.classList.add('mal');
+  });
+  const fb=document.getElementById('fb');
+  fb.className=`feedback show ${ok?'ok':'mal'}`;
+  fb.innerHTML=ok?`✅ <strong>¡Correcto!</strong> ${q.exp}`:`❌ <strong>No era esa.</strong> La correcta era: <strong>${q.ops[q.c]}</strong>. ${q.exp}`;
+  const aciertos=respuestas.filter(r=>r===true).length;
+  document.getElementById('ni').textContent=`${aciertos} aciertos`;
+  document.getElementById('bsig').style.display='block';
+  document.querySelectorAll('.bolita').forEach((el,j)=>{
+    if(j===pActual){el.className=`bolita ${ok?'ok':'mal'}`;el.textContent=ok?'✓':'✗';}
+  });
+}
+
+function sigTest(){
+  pActual++;
+  if(pActual>=preguntas.length) resultTest();
+  else renderTest();
+}
+
+// ══════════════════════════════════════════════════════════
+// FLASH
+// ══════════════════════════════════════════════════════════
+function renderFlash(){
+  const f=preguntas[pActual], n=preguntas.length;
+  document.getElementById('p-juego').innerHTML=`
+    ${htmlProg(pActual,n)}
+    <div class="chip">${TEMAS[tIdx].nombre} · ${pActual+1} / ${n}</div>
+    <p class="flash-hint">Toca la tarjeta para ver la respuesta</p>
+    <div class="flash-wrap" id="fw" onclick="girarFlash()">
+      <div class="flash-inner">
+        <div class="flash-front">
+          <div class="ff-label">Pregunta</div>
+          <div class="ff-q">${f.p}</div>
+        </div>
+        <div class="flash-back">
+          <div class="fb-label">Respuesta</div>
+          <div class="fb-r">${f.r}</div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row center" style="gap:10px;">
+      <button class="btn btn-ghost" onclick="volver()">← Volver</button>
+      <button class="btn btn-ghost" onclick="prevFlash()" ${pActual===0?'disabled':''}>‹ Anterior</button>
+      <button class="btn btn-blue" onclick="nextFlash()">${pActual===n-1?'Ver resultado ✓':'Siguiente →'}</button>
+    </div>`;
+}
+
+function girarFlash(){
+  document.getElementById('fw').classList.toggle('flip');
+  document.querySelector('.flash-hint').textContent=
+    document.getElementById('fw').classList.contains('flip')?'Toca para volver a la pregunta':'Toca la tarjeta para ver la respuesta';
+}
+function nextFlash(){ pActual++; if(pActual>=preguntas.length) resultFlash(); else renderFlash(); }
+function prevFlash(){ if(pActual>0){ pActual--; renderFlash(); } }
+
+// ══════════════════════════════════════════════════════════
+// HUECOS
+// ══════════════════════════════════════════════════════════
+function renderHuecos(){
+  const respondido=huecoState.filter(h=>h.est!=='pend').length;
+  const n=huecoState.length;
+  const pct=Math.round((respondido/n)*100);
+  const todo=huecoState.every(h=>h.est!=='pend');
+  const ok=huecoState.filter(h=>h.est==='ok').length;
+
+  let items=huecoState.map((h,i)=>{
+    const inp=`<input class="hueco-input ${h.est==='ok'?'ok':h.est==='mal'?'mal':''}"
+      id="hi${i}" value="${h.val}" ${h.est!=='pend'?'disabled':''} placeholder="…"
+      onkeydown="if(event.key==='Enter')comprobarHuecos()"/>`;
+    return `<div class="huecos-item ${h.est==='ok'?'ok':h.est==='mal'?'mal':''}">
+      <div class="huecos-frase">${h.f.replace('_____',inp)}</div>
+      <div class="huecos-pista">Pista: ${h.p}</div>
+      ${h.est==='mal'?`<div class="huecos-sol">Respuesta correcta: ${h.r}</div>`:''}
+    </div>`;
+  }).join('');
+
+  let bots=todo
+    ?`<div style="text-align:center;padding:1rem 0;">
+        <p style="font-size:22px;font-weight:900;color:var(--azul);margin-bottom:1rem;">${ok} / ${n} correctas</p>
+        <div class="btn-row center">
+          <button class="btn btn-ghost" onclick="volver()">Volver al inicio</button>
+          <button class="btn btn-blue" onclick="reinHuecos()">Intentar de nuevo</button>
+        </div>
+      </div>`
+    :`<div class="btn-row" style="margin-top:0.75rem;">
+        <button class="btn btn-ghost" onclick="volver()">← Volver</button>
+        <button class="btn btn-blue" onclick="comprobarHuecos()">Comprobar →</button>
+      </div>`;
+
+  document.getElementById('p-juego').innerHTML=`
+    <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="chip">${TEMAS[tIdx].nombre} · Rellena el hueco</div>
+    <p style="font-size:13px;font-weight:600;color:var(--texto2);margin-bottom:1rem;">
+      Escribe la palabra que falta en cada frase. Pulsa <strong>Comprobar</strong> cuando termines.</p>
+    ${items}${bots}`;
+}
+
+function comprobarHuecos(){
+  huecoState.forEach((h,i)=>{
+    if(h.est==='pend'){
+      const el=document.getElementById('hi'+i);
+      const val=el?el.value.trim():'';
+      h.val=val;
+      const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+      h.est=norm(val)===norm(h.r)?'ok':'mal';
+    }
+  });
+  renderHuecos();
+}
+function reinHuecos(){
+  huecoState=mezclar([...TEMAS[tIdx].huecos]).map(h=>({...h,val:'',est:'pend'}));
+  renderHuecos();
+}
+
+
+
+// ══════════════════════════════════════════════════════════
+// RESULTADOS
+// ══════════════════════════════════════════════════════════
+function resultTest(){
+  const ok=respuestas.filter(r=>r===true).length;
+  const total=preguntas.length;
+  const pct=Math.round((ok/total)*100);
+  const [color,bg,msg,sub]=
+    pct>=80?['var(--verde)','#f0fdf4','¡Muy bien!','Tienes esto controlado. A por el examen.']:
+    pct>=60?['var(--amber)','#fffbeb','Casi casi...','Repasa los fallos y vuelve a intentarlo.']:
+            ['var(--rojo)','#fef2f2','Hay que repasar más','No pasa nada, vuelve a las tarjetas primero.'];
+
+  document.getElementById('p-resultado').innerHTML=`
+    <div class="result-wrap">
+      <div class="result-circulo" style="background:${bg};color:${color};">
+        <div class="result-num">${ok}/${total}</div>
+        <div class="result-total">${pct}%</div>
+      </div>
+      <div class="result-msg">${msg}</div>
+      <div class="result-sub">${sub}</div>
+      <div class="btn-row center">
+        <button class="btn btn-ghost" onclick="show('p-actividades')">Cambiar actividad</button>
+        <button class="btn btn-blue" onclick="lanzar('test')">Repetir test</button>
+        ${pct<80?`<button class="btn btn-green" onclick="lanzar('flash')">Repasar tarjetas</button>`:''}
+      </div>
+    </div>`;
+  show('p-resultado');
+}
+
+function resultFlash(){
+  document.getElementById('p-resultado').innerHTML=`
+    <div class="result-wrap">
+      <div class="result-circulo" style="background:#eff6ff;color:var(--azul);">
+        <div class="result-num">${preguntas.length}</div>
+        <div class="result-total">tarjetas</div>
+      </div>
+      <div class="result-msg">Has repasado todas las tarjetas</div>
+      <div class="result-sub">Ahora prueba el test para ver cuánto te ha quedado.</div>
+      <div class="btn-row center">
+        <button class="btn btn-ghost" onclick="show('p-actividades')">Cambiar actividad</button>
+        <button class="btn btn-blue" onclick="lanzar('test')">Hacer el test</button>
+        <button class="btn btn-green" onclick="lanzar('flash')">Repetir tarjetas</button>
+      </div>
+    </div>`;
+  show('p-resultado');
+}
+</script>
+</body>
+</html>
